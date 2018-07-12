@@ -1,0 +1,73 @@
+html {
+    /* background: url(http://unsplash.it/1920?image=881&blur) no-repeat center center fixed; */
+    background: url(http://unsplash.it/1920?image=994&blur) no-repeat center center fixed;
+    /* background: url(http://unsplash.it/1500?image=950&blur) no-repeat center center fixed; */
+    background-size: cover;
+    font-family: 'helvetica nueu';
+    text-align: center;
+    font-size: 10px;
+    overflow: hidden;
+}
+body {
+    font-size: 2rem;
+    display: flex;
+    flex: 1;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.clock {
+    width: 30rem;
+    height: 30rem;
+    min-width: 350px;
+    min-height: 350px;
+    border: 20px solid rgba(255,255,255, 0.75);
+    border-radius: 50%;
+    margin: 50px auto;
+    position: relative;
+    padding: 2rem;
+    box-shadow: 
+        0 0 10px rgba(0,0,0,0.2),
+        inset 0 0 10px black;
+}
+.clock-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-5px);
+}
+
+.hand {
+    width: 50%;
+    height: 10px;
+    background: black;
+    position: absolute;
+    top: 50%;
+
+    right: 50%;
+    background: rgba(0,0,0,0.6);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transform-origin: 100%;
+    transition: all 0.1s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+.second-hand {
+    height: 3px;
+    background: red;
+    background: rgba(255,0,0,0.6);
+}
+.hour-hand {
+    width: 30%;
+}
+
+.fade-in-on-load {
+    opacity: 0;
+    animation: fadeIn 1.5s 1.5s forwards;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    100% {
+        opacity: 1;
+    }    
+}
