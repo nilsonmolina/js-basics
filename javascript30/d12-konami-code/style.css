@@ -1,0 +1,40 @@
+body {
+    font-family: 'Trebuchet MS', 'helvetica neue', sans-serif;
+    background: #193549;
+    color: white;
+}
+h1 {
+    /* margin: auto; */
+    text-align: center;
+    font-family: 'helvetica neue', sans-serif;
+    font-size: 75px;
+}
+em {
+    font-weight: 100;
+    display: block;
+}
+.achievement-banner {
+    height: 50px;
+    width: 400px;
+    margin: 0 auto;
+    border-radius: 10em;
+    max-width: 80%;
+    background: #3d4142;
+    color: #efefef;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 
+        0 5px 15px 3px rgba(0,0,0,0.2),
+        inset 0 0 5px rgba(0,0,0,0.7);
+    transform: translateY(-120px);
+    transition: 0.4s cubic-bezier(1, 1.01, 0.95, 1.09)
+}
+.title {
+    font-size: 1.5rem;
+}
+.description {
+    font-size: 1.1rem;
+}
+.unlocked {
+    transform: translateY(10px);
+}

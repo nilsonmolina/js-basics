@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Day12: Konami Code</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="achievement-banner">
+        <div class="title">Achievement unlocked</div>
+        <div class="description">75G - Konami Code</div>
+    </div>
+
+    <h1 title="try typing the cheatcode">The cheatcode is: <em>lucky13</em></h1>
+
+    <audio src="sounds/AchievementUnlocked.mp3"></audio>
+    <script>
+        const banner = document.querySelector('.achievement-banner');
+        const audio = document.querySelector('audio');
+        const pressed = [];
+        const secretCode = 'lucky13';
+
+        window.addEventListener('keyup', (e) => {
+            pressed.push(e.key);
+            pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+
+            if (pressed.join('').includes(secretCode)) {
+                audio.play();
+                banner.classList.add('unlocked');
+                setTimeout(() => banner.classList.remove('unlocked'), 4000);
+            }
+        })
+    </script>
+</body>
+</html>
