@@ -29,9 +29,11 @@
 
     const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry', 'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul', 'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David', 'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana', 'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar', 'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric', 'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell', 'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph', 'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank', 'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony', 'Blake, William'];
 
+    const vehicles = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
 
     // OUTPUT THE GIVEN DATA
-    console.log('--------------\nINVENTORS:\n', inventors, '\nPEOPLE:\n', people, '\n--------------\n');
+    console.log('--------------\nINVENTORS:\n', inventors, '\nPEOPLE:\n', people, '\nVEHICLES:\n', vehicles, '\n--------------\n');
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
@@ -62,29 +64,35 @@
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-    fetch('https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris', {mode: "no-cors"})
-      .then(response => response.text())
-      .then(text => {
-        const parser = new DOMParser();
-        const htmlDocument = parser.parseFromString(text, "text/html");
+      console.log(` [AJAX] 6. LIST OF BOULEVARDS IN PARIS THAT CONTAIN "DE"
+- NAVIGATE TO https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+- OPEN CONSOLE, AND RUN THE FOLLOWING COMMAND:
 
-        const links = [...htmlDocument.documentElement.querySelectorAll('.mw-category a')];
+        const links = [...document.querySelectorAll('.mw-category a')];
         const de = links
-                    .map(link => link.textContent)
-                    .filter(street => street.includes('de'));
-        console.log('[AJAX] 6. LIST OF BOULEVARDS IN PARIS THAT CONTAIN "DE"');
+                  .map(link => link.textContent)
+                  .filter(street => street.includes('de'));
         console.table(de);
-      });
+      `);
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-    const alphabetically = people.sort((a, b) => (a.last < b.last));
-    console.log('7. INVENTORS SORTED ALPHABETICALLY BY LAST NAME');
-    console.table(alphabetically);
+    const alpha = people.sort((a, b) => {
+      const [aLast, aFirst] = a.split(', ');
+      const [bLast, bFirst] = b.split(', ');
+      return aLast < bLast ? 1 : -1;
+    });
+    console.log('7. INVENTORS SORTED IN REVERSE-ALPHABETICAL ORDER BY LAST NAME');
+    console.table(alpha);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const sum = vehicles.reduce((obj, item) => {
+      obj[item] ? obj[item]++ : obj[item] = 1;
+      return obj;
+    }, {});
+    console.log('8. SUM OF VEHICLE INSTANCES');
+    console.table(sum);
 
   </script>
 </body>
