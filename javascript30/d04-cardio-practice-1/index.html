@@ -62,7 +62,7 @@
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-    fetch('https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris')
+    fetch('https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris', {mode: "no-cors"})
       .then(response => response.text())
       .then(text => {
         const parser = new DOMParser();
@@ -78,7 +78,7 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-    const alphabetically = inventors.sort((a, b) => (a.last > b.last));
+    const alphabetically = people.sort((a, b) => (a.last < b.last));
     console.log('7. INVENTORS SORTED ALPHABETICALLY BY LAST NAME');
     console.table(alphabetically);
 
