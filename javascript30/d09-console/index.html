@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()"><em>Psst: have a look at the JavaScript Console.</em> 💩</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    console.log('\n-----------\n1. Chrome Dev-Tools tip for debugging:\n','In the Elements tab of the Chrome dev tools, you can right click on the p tag and click "Break on" -> "attribute modifications" and if you go and click on the poop emoji, it will pop the debugger to see the lines of code that change that attribute.');
+
+    // Regular
+    console.log('\n-----------\n2. Regular console.log()');
+    console.log('hello');
+
+    // Interpolated
+    console.log('\n-----------\n3. Interpolated console.log()');
+    console.log('hello, I am a %s string!', '💩');
+
+    // Styled
+    console.log('\n-----------\n4. Styled console.log()');
+    console.log('%c This is some css styled text', 'background: yellow; color: red; font-size: 18px; border: 1px solid black;');
+
+    // warning!
+    console.log('\n-----------\n5. Console Warning');
+    console.warn('This is your last warning! (provides a stack trace of where this got called)');
+
+    // Error :|
+    console.log('\n-----------\n6. Console Error');
+    console.error('I tried to warn you -.- (also provides stack trace)');
+
+    // Info
+    console.log('\n-----------\n7. Console Info');
+    console.info('This is an info message');
+
+    // Testing
+    console.log('\n-----------\n8. Console Testing with "Assert" (Only failed assertions show up in console)');
+    console.assert(1 == '1', 'If this failed, then JS is a lie!');
+
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('blah'), 'expected "blah" class on element');
+
+    // clearing
+    console.log('\n-----------\n9. Clear console (obviously I did not run it)');
+    // console.clear();
+    console.log('console.clear()');
+
+    // Viewing DOM Elements
+    console.log('\n-----------\n10. Viewing DOM elements');
+    console.log(p);
+    console.dir(p);
+
+    // Grouping together
+    console.log('\n-----------\n11. Grouping (can also be collapsed by default)');
+    dogs.forEach(dog => {
+      // console.groupCollapsed(`${dog.name}`);
+      console.group(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old.`);
+      console.log(`That is ${dog.age * 7} in dog years!`);
+      console.groupEnd(`${dog.name}`);
+    })
+
+    // counting
+    console.log('\n-----------\n12. Counting');
+    console.count('😎');
+    console.count('💩');
+    console.count('💩');
+    console.count('💩');
+    console.count('😎');
+    console.count('😎');
+    console.count('💩');
+    console.count('😎');
+    console.count('💩');
+    console.count('💩');
+
+    // table
+    console.log('\n-----------\n13. Table');
+    console.table(dogs);
+
+    // timing
+    console.log('\n-----------\n14. Timing');
+    console.time('fetching data');
+
+    fetch('http://23.23.42.188/')
+      .then(data => data.text())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log('RESPONSE:', {data});
+      });
+
+  </script>
+</body>
+</html>
