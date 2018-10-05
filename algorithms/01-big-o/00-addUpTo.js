@@ -4,26 +4,26 @@
 ---------------------------------*/
 
 // Solution 1
-function addUpToFirst(n) {
-    let total = 0;
-    for (let i = 1; i <= n; i++) {
-        total += i;
-    }
-    return total;
+function addUpTo(n) {
+  let total = 0;
+  for (let i = 1; i <= n; i++) {
+    total += i;
+  }
+  return total;
 }
 
-var start = performance.now();
-addUpToFirst(1000000000);
-var end = performance.now();
+let start = Date.now();
+addUpTo(1000000000);
+let end = Date.now();
 console.log(`Solution 1: ${(end - start)} ms`);
 
 
 // Solution 2
-function addUpToSecond(n) {
-    return n * (n + 1) / 2;
+function addUpTo2(n) {
+  return n * (n + 1) / 2;
 }
 
-start = performance.now();
-addUpToSecond(1000000000);
-end = performance.now();
+start = Date.now();
+addUpTo2(1000000000);
+end = Date.now();
 console.log(`Solution 2: ${(end - start)} ms`);
