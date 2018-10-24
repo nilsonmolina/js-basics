@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bar Charts</title>
+</head>
+<body>
+
+    <div class="canvas"></div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBaY0SbOQ0UPakaXflqVd5CmLc2E4EVy4w",
+            authDomain: "d3-basics.firebaseapp.com",
+            databaseURL: "https://d3-basics.firebaseio.com",
+            projectId: "d3-basics",
+            storageBucket: "d3-basics.appspot.com",
+            messagingSenderId: "505289701658"
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+    </script>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
