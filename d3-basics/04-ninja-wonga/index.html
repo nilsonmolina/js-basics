@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ninja Wonga</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="indigo">
+    <header class="indigo darken-1 section">
+        <h2 class="center white-text">Ninja Wonga</h2>
+        <p class="flow-text grey-text center text-lighten-2">
+            Monthly money tracker for ninjas...
+        </p>
+    </header>
+
+    <div class="container section">
+        <div class="row">
+            <div class="col m12 l5 center-align">
+                <form class="card add-item z-depth-4" autocomplete="off">
+                    <div class="card-content">
+                        <span class="card-title indigo-text">Add Item:</span>
+                        <div class="input-field">
+                            <input type="text" id="item-name" required>
+                            <label for="item-name">Item Name</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input type="number" id="cost" required>
+                            <label for="cost">Item Cost ($)</label>
+                        </div>
+
+                        <div class="input-field center">
+                            <button class="btn-large pink white-text">Add Item</button>
+                        </div>
+
+                        <div class="input-field center">
+                            <p class="red-text" id="error"></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col m12 l5 push-l1 center-align">
+                <div class="canvas"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBaY0SbOQ0UPakaXflqVd5CmLc2E4EVy4w",
+            authDomain: "d3-basics.firebaseapp.com",
+            databaseURL: "https://d3-basics.firebaseio.com",
+            projectId: "d3-basics",
+            storageBucket: "d3-basics.appspot.com",
+            messagingSenderId: "505289701658"
+        };
+        firebase.initializeApp(config);
+
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+    </script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="graph.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

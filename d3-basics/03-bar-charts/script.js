@@ -41,6 +41,10 @@ const x = d3.scaleBand()
 const xAxis = d3.axisBottom(x);
 const yAxis = d3.axisLeft(y).ticks(3).tickFormat(d => `${d} orders`);
 
+// // NOT WORKING
+// transitions
+// const t = d3.transition().duration(1000);
+
 /*--------------------------------
   UPDATE FUNCTION
 --------------------------------*/
@@ -56,20 +60,23 @@ const update = (data) => {
   rects.exit().remove();
 
   // update current shapes in DOM
-  rects.attr('width', x.bandwidth)
-    .attr('height', d => graphHeight - y(d.orders))
-    .attr('fill', 'darkorange')
-    .attr('x', d => x(d.name))
-    .attr('y', d => y(d.orders));
+  rects.attr('fill', 'darkorange')
+    .attr('width', x.bandwidth)
+    .attr('x', d => x(d.name));
 
   // create virtual rects if more data than rects & append to DOM
   rects.enter()
     .append('rect')
-    .attr('width', x.bandwidth)
-    .attr('height', d => graphHeight - y(d.orders))
     .attr('fill', 'darkorange')
+    .attr('width', x.bandwidth)
     .attr('x', d => x(d.name))
-    .attr('y', d => y(d.orders));
+    .attr('height', 0)
+    .attr('y', graphHeight)
+    .merge(rects)
+    .transition()
+    .duration(1000)
+    .attr('y', d => y(d.orders))
+    .attr('height', d => graphHeight - y(d.orders));
 
   // call axis
   xAxisGroup.call(xAxis);
