@@ -15,7 +15,6 @@ const speedIncrease = 1;
 let fps = startingFPS;
 let paused = true;
 let gameOver = false;
-let direction = 'RIGHT';
 // canvas and context
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
@@ -71,6 +70,8 @@ const food = {
 
 const snake = {
   body: [{ x: 9 * box, y: 10 * box }],
+  direction: 'RIGHT',
+  dirChanged: false,
 
   draw() {
     for (let i = 0; i < this.body.length; i++) {
@@ -96,17 +97,24 @@ const snake = {
     if (newHead.x === food.x && newHead.y === food.y) scorePoint();
     else this.body.pop();
     // update new head position based on direction
-    if (direction === 'UP') newHead.y -= box;
-    else if (direction === 'DOWN') newHead.y += box;
-    else if (direction === 'LEFT') newHead.x -= box;
-    else if (direction === 'RIGHT') newHead.x += box;
+    if (this.direction === 'UP') newHead.y -= box;
+    else if (this.direction === 'DOWN') newHead.y += box;
+    else if (this.direction === 'LEFT') newHead.x -= box;
+    else if (this.direction === 'RIGHT') newHead.x += box;
+    this.dirChanged = false;
     // check if game over
     if (this.checkCollision(newHead)) endGame();
     // add new head
     this.body.unshift(newHead);
   },
+  setDirection(direction) {
+    if (this.dirChanged) return;
+    this.direction = direction;
+    this.dirChanged = true;
+  },
   reset() {
     this.body = [{ x: 9 * box, y: 10 * box }];
+    snake.setDirection('RIGHT');
   },
 };
 
@@ -143,10 +151,10 @@ document.addEventListener('keydown', handleKeyDown);
 function handleKeyDown(e) {
   if (e.keyCode === 32) togglePause();
   else if (paused) console.log('no moving while paused');
-  else if (e.keyCode === 37 && direction !== 'RIGHT') direction = 'LEFT';
-  else if (e.keyCode === 38 && direction !== 'DOWN') direction = 'UP';
-  else if (e.keyCode === 39 && direction !== 'LEFT') direction = 'RIGHT';
-  else if (e.keyCode === 40 && direction !== 'UP') direction = 'DOWN';
+  else if (e.keyCode === 37 && snake.direction !== 'RIGHT') snake.setDirection('LEFT');
+  else if (e.keyCode === 38 && snake.direction !== 'DOWN') snake.setDirection('UP');
+  else if (e.keyCode === 39 && snake.direction !== 'LEFT') snake.setDirection('RIGHT');
+  else if (e.keyCode === 40 && snake.direction !== 'UP') snake.setDirection('DOWN');
 }
 
 /*------------------
@@ -188,7 +196,6 @@ function resetGame() {
   snake.reset();
   food.randomize();
   fps = startingFPS;
-  direction = 'RIGHT';
   gameOver = false;
   game = setInterval(draw, 1000 / ++fps);
 }
