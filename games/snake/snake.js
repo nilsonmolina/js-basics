@@ -50,10 +50,8 @@ const highscore = {
     this.element.innerHTML = this.value();
   },
   set(num) {
-    console.log(parseInt(this.value(), 10));
     if (num > parseInt(this.value(), 10)) localStorage.setItem('highscore', num);
     highscore.draw();
-    console.log(parseInt(this.value(), 10));
   },
 };
 
@@ -112,6 +110,15 @@ const snake = {
   },
 };
 
+const text = {
+  showPause() {
+    ctx.font = '36px "Press Start 2P"';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#eee';
+    ctx.fillText('paused', canvas.width / 2, canvas.height / 2);
+  },
+};
+
 const sounds = {
   isMuted: true,
   events: {
@@ -126,7 +133,6 @@ const sounds = {
     for (const sound in this.themes) { this.themes[sound].volume = level; }
   },
 };
-sounds.setVolume();
 
 /*------------------
  EVENT LISTENERS
@@ -136,7 +142,7 @@ document.addEventListener('keydown', handleKeyDown);
 
 function handleKeyDown(e) {
   if (e.keyCode === 32) togglePause();
-  else if (paused) console.log('nice try, cheater');
+  else if (paused) console.log('no moving while paused');
   else if (e.keyCode === 37 && direction !== 'RIGHT') direction = 'LEFT';
   else if (e.keyCode === 38 && direction !== 'DOWN') direction = 'UP';
   else if (e.keyCode === 39 && direction !== 'LEFT') direction = 'RIGHT';
@@ -154,6 +160,7 @@ function togglePause() {
     resetGame();
   } else {
     paused = true;
+    text.showPause();
     clearInterval(game);
   }
 }
@@ -192,6 +199,7 @@ function resetGame() {
 // run once
 score.draw();
 highscore.draw();
+sounds.setVolume();
 let game = paused;
 
 // function that will loop
