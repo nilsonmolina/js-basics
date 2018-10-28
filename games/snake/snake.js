@@ -119,11 +119,26 @@ const snake = {
 };
 
 const text = {
+  centerX: canvas.width / 2,
+  centerY: canvas.height / 2,
+
   showPause() {
     ctx.font = '36px "Press Start 2P"';
     ctx.textAlign = 'center';
     ctx.fillStyle = '#eee';
-    ctx.fillText('paused', canvas.width / 2, canvas.height / 2);
+    ctx.fillText('paused', this.centerX, this.centerY);
+  },
+  showGameover() {
+    ctx.font = '28px "Press Start 2P"';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#eee';
+    ctx.fillText('GAME OVER', this.centerX, this.centerY);
+  },
+  showTitle() {
+    ctx.font = '11px "Press Start 2P"';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#eee';
+    ctx.fillText('PRESS "SPACEBAR" TO START', this.centerX, this.centerY);
   },
 };
 
@@ -188,6 +203,7 @@ function endGame() {
   gameOver = true;
   sounds.events.gameOver.currentTime = 0;
   sounds.events.gameOver.play();
+  text.showGameover();
   highscore.set(score.value);
 }
 
@@ -204,6 +220,7 @@ function resetGame() {
  GAME LOOP
 ------------------*/
 // run once
+text.showTitle();
 score.draw();
 highscore.draw();
 sounds.setVolume();
