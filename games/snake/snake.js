@@ -135,7 +135,7 @@ const text = {
     ctx.fillText('GAME OVER', this.centerX, this.centerY);
   },
   showTitle() {
-    ctx.font = '11px "Press Start 2P"';
+    ctx.font = '11px "Press Start 2P", verdana, sans-serif';
     ctx.textAlign = 'center';
     ctx.fillStyle = '#eee';
     ctx.fillText('PRESS "SPACEBAR" TO START', this.centerX, this.centerY);
@@ -146,14 +146,16 @@ const sounds = {
   isMuted: true,
   events: {
     gameOver: new Audio('sounds/sad-trombone.m4a'),
+    score: new Audio('sounds/score.wav'),
+    coin: new Audio('sounds/coin.wav'),
   },
-  themes: {
-    undertale: new Audio('sounds/sad-trombone.m4a'),
-  },
+  // themes: {
+  //   undertale: new Audio('sounds/undertale.m4a'),
+  // },
 
   setVolume(level = 0.1) {
     for (const sound in this.events) { this.events[sound].volume = level; }
-    for (const sound in this.themes) { this.themes[sound].volume = level; }
+    // for (const sound in this.themes) { this.themes[sound].volume = level; }
   },
 };
 
@@ -190,6 +192,18 @@ function togglePause() {
 
 function scorePoint() {
   score.increment();
+  // play sound based on score
+  // if (score.value === 10) {
+  //   sounds.themes.undertale.currentTime = 0;
+  //   sounds.themes.undertale.play();
+  // }
+  if (score.value % 5 === 0) {
+    sounds.events.coin.currentTime = 0;
+    sounds.events.coin.play();
+  } else {
+    sounds.events.score.currentTime = 0;
+    sounds.events.score.play();
+  }
   // create new food block
   food.randomize();
   // increase game speed
@@ -201,6 +215,8 @@ function scorePoint() {
 function endGame() {
   clearInterval(game);
   gameOver = true;
+  // sounds.themes.undertale.pause();
+  // sounds.themes.undertale.currentTime = 0;
   sounds.events.gameOver.currentTime = 0;
   sounds.events.gameOver.play();
   text.showGameover();
