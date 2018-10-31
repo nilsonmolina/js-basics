@@ -15,6 +15,7 @@ const speedIncrease = 1;
 let fps = startingFPS;
 let paused = true;
 let gameOver = false;
+let gotHighscore = false;
 // canvas and context
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
@@ -43,14 +44,16 @@ const score = {
 
 const highscore = {
   element: document.querySelector('.highscore'),
+  value: parseInt(localStorage.getItem('highscore'), 10) || 15,
 
-  value() { return localStorage.getItem('highscore') || '0'; },
-  draw() {
-    this.element.innerHTML = this.value();
-  },
   set(num) {
-    if (num > parseInt(this.value(), 10)) localStorage.setItem('highscore', num);
+    console.log(num, this.value);
+    if (num > this.value) localStorage.setItem('highscore', num);
+    this.value = parseInt(localStorage.getItem('highscore'), 10) || 0;
     highscore.draw();
+  },
+  draw() {
+    this.element.innerHTML = this.value;
   },
 };
 
@@ -134,6 +137,12 @@ const text = {
     ctx.fillStyle = '#eee';
     ctx.fillText('GAME OVER', this.centerX, this.centerY);
   },
+  showHighscore() {
+    ctx.font = '16px "Press Start 2P"';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#eee';
+    ctx.fillText('NEW HIGHSCORE!', this.centerX, this.centerY);
+  },
   showTitle() {
     ctx.font = '11px "Press Start 2P", verdana, sans-serif';
     ctx.textAlign = 'center';
@@ -148,6 +157,7 @@ const sounds = {
     gameOver: new Audio('sounds/sad-trombone.m4a'),
     score: new Audio('sounds/score.wav'),
     coin: new Audio('sounds/coin.wav'),
+    newHighscore: new Audio('sounds/newHighscore.m4a'),
   },
   // themes: {
   //   undertale: new Audio('sounds/undertale.m4a'),
@@ -163,6 +173,7 @@ const sounds = {
  EVENT LISTENERS
 ------------------*/
 document.addEventListener('keydown', handleKeyDown);
+sounds.events.newHighscore.onended = handleEndNewHighscore;
 
 
 function handleKeyDown(e) {
@@ -174,16 +185,22 @@ function handleKeyDown(e) {
   else if (e.keyCode === 40 && snake.direction !== 'UP') snake.setDirection('DOWN');
 }
 
+function handleEndNewHighscore() {
+  gotHighscore = false;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  text.showGameover();
+}
+
 /*------------------
  HELPER FUNCTIONS
 ------------------*/
 function togglePause() {
-  if (paused && !gameOver) {
+  if (paused && !gameOver && !gotHighscore) {
     paused = false;
     game = setInterval(draw, 1000 / fps);
-  } else if (gameOver) {
+  } else if (gameOver && !gotHighscore) {
     resetGame();
-  } else {
+  } else if (!paused && !gameOver && !gotHighscore) {
     paused = true;
     text.showPause();
     clearInterval(game);
@@ -215,12 +232,24 @@ function scorePoint() {
 function endGame() {
   clearInterval(game);
   gameOver = true;
-  // sounds.themes.undertale.pause();
-  // sounds.themes.undertale.currentTime = 0;
+
+  if (score.value > highscore.value) newHighscore();
+  else showGameOver();
+
+  highscore.set(score.value);
+}
+
+function newHighscore() {
+  gotHighscore = true;
+  sounds.events.newHighscore.currentTime = 0;
+  sounds.events.newHighscore.play();
+  text.showHighscore();
+}
+
+function showGameOver() {
+  text.showGameover();
   sounds.events.gameOver.currentTime = 0;
   sounds.events.gameOver.play();
-  text.showGameover();
-  highscore.set(score.value);
 }
 
 function resetGame() {
@@ -244,11 +273,8 @@ let game = paused;
 
 // function that will loop
 function draw() {
-  // clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // update positions
   snake.update();
-  // redraw assets
   snake.draw();
   food.draw();
 }
