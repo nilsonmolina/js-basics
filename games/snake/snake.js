@@ -9,8 +9,9 @@
 const dimensions = 300;
 const unit = 25;
 const box = dimensions / unit;
-const startingFPS = 5;
-const speedIncrease = 1;
+const startingFPS = 10;
+const speedIncrease = 0.5;
+const defaultHighScore = 13;
 // game defaults
 let fps = startingFPS;
 let paused = true;
@@ -44,12 +45,11 @@ const score = {
 
 const highscore = {
   element: document.querySelector('.highscore'),
-  value: parseInt(localStorage.getItem('highscore'), 10) || 15,
+  value: parseInt(localStorage.getItem('highscore'), 10) || defaultHighScore,
 
   set(num) {
-    console.log(num, this.value);
     if (num > this.value) localStorage.setItem('highscore', num);
-    this.value = parseInt(localStorage.getItem('highscore'), 10) || 0;
+    this.value = parseInt(localStorage.getItem('highscore'), 10) || defaultHighScore;
     highscore.draw();
   },
   draw() {
@@ -154,10 +154,12 @@ const text = {
 const sounds = {
   isMuted: true,
   events: {
-    gameOver: new Audio('sounds/sad-trombone.m4a'),
+    gameOver: new Audio('sounds/alarm_loop8.wav'),
     score: new Audio('sounds/score.wav'),
     coin: new Audio('sounds/coin.wav'),
     newHighscore: new Audio('sounds/newHighscore.m4a'),
+    pauseIn: new Audio('sounds/pause1_in.wav'),
+    pauseOut: new Audio('sounds/pause1_out.wav'),
   },
   // themes: {
   //   undertale: new Audio('sounds/undertale.m4a'),
@@ -197,11 +199,15 @@ function handleEndNewHighscore() {
 function togglePause() {
   if (paused && !gameOver && !gotHighscore) {
     paused = false;
+    sounds.events.pauseOut.currentTime = 0;
+    sounds.events.pauseOut.play();
     game = setInterval(draw, 1000 / fps);
   } else if (gameOver && !gotHighscore) {
     resetGame();
   } else if (!paused && !gameOver && !gotHighscore) {
     paused = true;
+    sounds.events.pauseIn.currentTime = 0;
+    sounds.events.pauseIn.play();
     text.showPause();
     clearInterval(game);
   }
