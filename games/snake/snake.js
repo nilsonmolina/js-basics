@@ -22,6 +22,10 @@ const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = dimensions;
 canvas.height = dimensions;
+// if device has touch controls, show dpad
+if ('ontouchstart' in document.documentElement) {
+  document.querySelector('.dpad').classList.remove('hidden');
+}
 
 /*------------------
  GAME ASSETS
@@ -138,7 +142,7 @@ const text = {
     ctx.fillText('GAME OVER', this.centerX, this.centerY);
   },
   showHighscore() {
-    ctx.font = '16px "Press Start 2P"';
+    ctx.font = '18px "Press Start 2P"';
     ctx.textAlign = 'center';
     ctx.fillStyle = '#eee';
     ctx.fillText('NEW HIGHSCORE!', this.centerX, this.centerY);
@@ -171,20 +175,32 @@ const sounds = {
   },
 };
 
+const dpad = {
+  element: document.querySelector('.dpad'),
+};
+
 /*------------------
  EVENT LISTENERS
 ------------------*/
 document.addEventListener('keydown', handleKeyDown);
+canvas.addEventListener('touchend', togglePause);
+dpad.element.addEventListener('click', handleDpadClicked);
 sounds.events.newHighscore.onended = handleEndNewHighscore;
 
-
 function handleKeyDown(e) {
+  console.log(e.keyCode);
   if (e.keyCode === 32) togglePause();
   else if (paused) console.log('no moving while paused');
   else if (e.keyCode === 37 && snake.direction !== 'RIGHT') snake.setDirection('LEFT');
   else if (e.keyCode === 38 && snake.direction !== 'DOWN') snake.setDirection('UP');
   else if (e.keyCode === 39 && snake.direction !== 'LEFT') snake.setDirection('RIGHT');
   else if (e.keyCode === 40 && snake.direction !== 'UP') snake.setDirection('DOWN');
+}
+function handleDpadClicked(e) {
+  if (e.target.classList.contains('up')) handleKeyDown({ keyCode: 38 });
+  else if (e.target.classList.contains('down')) handleKeyDown({ keyCode: 40 });
+  else if (e.target.classList.contains('left')) handleKeyDown({ keyCode: 37 });
+  else if (e.target.classList.contains('right')) handleKeyDown({ keyCode: 39 });
 }
 
 function handleEndNewHighscore() {

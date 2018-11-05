@@ -3,7 +3,11 @@ body {
     padding: 0;
     background-color: #2a2a2a;
 }
+.hidden {
+    display: none;
+}
 .header {
+    display: block;
     padding: 40px 20px;
     text-align: center;
     font-family: 'Press Start 2P', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -32,3 +36,227 @@ canvas {
     background-color: #222;
     border: 10px solid #333;
 }
+
+/* --------------------
+    FOR MOBILE
+---------------------*/
+@media screen and (max-width: 900px) {
+    .header {
+        padding: 20px 10px;
+        font-size: 18px;
+    }
+    .scoreboard {
+        margin: 15px auto 7px auto;
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .header {
+        display: none;
+    }
+}
+
+@media screen and (max-height: 550px) {
+    .dpad {
+        border: 1px solid red;
+    }
+}
+
+
+/* --------------------
+    D-PAD
+---------------------*/
+.dpad {
+    margin: 5px auto;
+    position: relative;
+    height: 150px;
+    width: 150px;
+}
+.dpad::before {
+    content: "";
+    position: absolute;
+    width: 33.4%;
+    height: 33.4%;
+    margin: auto;
+    background-color: #222;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.dpad::after {
+    content: "";
+    position: absolute;
+    width: 17%;
+    height: 17%;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 50%;
+    background-color: #2a2a2a;
+    box-shadow: 1px 0#3a3a3a;
+}
+.dpad .btn {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    background-color: #222;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 1px -1px #333;
+}
+.dpad .btn::before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 10%;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 20px solid #1e1e1e;
+}
+.dpad .up {
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.dpad .down {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: rotate(180deg);
+}
+.dpad .left {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: rotate(-90deg);
+}
+.dpad .right {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transform: rotate(90deg);
+}
+
+/* --------- BACKUP OF DPAD ----------- */
+/* .dpad {
+    margin: auto;
+    position: relative;
+    height: 150px;
+    width: 150px;
+}
+.dpad::before {
+    content: "";
+    position: absolute;
+    width: 33.4%;
+    height: 33.4%;
+    margin: auto;
+    background-color: #222;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.dpad .btn {
+    position: absolute;
+    width: 33.33%;
+    height: 33.33%;
+    margin: auto;
+    background-color: #222;
+}
+.dpad .up {
+    top: 0;
+    left: 0;
+    right: 0;
+    border-radius: 10px 10px 0 0;
+}
+.dpad .down {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0 0 10px 10px;
+}
+.dpad .left {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 10px 0 0 10px;
+}
+.dpad .right {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 0 10px 10px 0;
+} */
+
+
+/* ALMOST WORKED, BUT TRIANGLES CLICK WOULD ONLY WORK FOR */
+/* .dpad {
+    margin: auto;
+    position: relative;
+    height: 150px;
+    width: 150px;
+}
+.dpad .btn {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    background-color: #222;
+    border-radius: 10px 10px 0 0;
+}
+.dpad .btn::before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    transform: translateY(50px);
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-top: 25px solid #222;
+}
+.dpad .btn::after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 10%;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 20px solid #1c1c1c;
+}
+.dpad .up {
+    top: -1px;
+    left: -1px;
+    right: -1px;
+}
+.dpad .down {
+    bottom: -1px;
+    left: -1px;
+    right: -1px;
+    transform: rotate(180deg);
+}
+.dpad .left {
+    left: -1px;
+    top: -1px;
+    bottom: -1px;
+    transform: rotate(-90deg);
+}
+.dpad .right {
+    right: -1px;
+    top: -1px;
+    bottom: -1px;
+    transform: rotate(90deg);
+} */
