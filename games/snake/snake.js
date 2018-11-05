@@ -184,7 +184,8 @@ const dpad = {
 ------------------*/
 document.addEventListener('keydown', handleKeyDown);
 canvas.addEventListener('touchend', togglePause);
-dpad.element.addEventListener('click', handleDpadClicked);
+// dpad.element.addEventListener('click', handleDpadClicked);
+dpad.element.addEventListener('touchstart', handleDpadClicked);
 sounds.events.newHighscore.onended = handleEndNewHighscore;
 
 function handleKeyDown(e) {
