@@ -188,7 +188,6 @@ dpad.element.addEventListener('click', handleDpadClicked);
 sounds.events.newHighscore.onended = handleEndNewHighscore;
 
 function handleKeyDown(e) {
-  console.log(e.keyCode);
   if (e.keyCode === 32) togglePause();
   else if (paused) console.log('no moving while paused');
   else if (e.keyCode === 37 && snake.direction !== 'RIGHT') snake.setDirection('LEFT');
