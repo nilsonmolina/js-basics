@@ -1,0 +1,14 @@
+// const { longestSubsequence } = require('../longestSubsequence');
+
+// describe('longestSubsequence', () => {
+//   it('should pass all given examples', () => {
+//     expect(longestSubsequence('ABAZDC', 'BACBAD')).toBe('ABAD');
+//     expect(longestSubsequence('AGGTAB', 'GXTXAYB')).toBe('GTAB');
+//     expect(longestSubsequence('aaaa', 'aa')).toBe('aa');
+//   });
+
+//   it('should pass my edge cases', () => {
+//     expect(longestSubsequence('', 'abcd')).toBe('');
+//     expect(longestSubsequence('ABBA', 'ABCABA')).toBe('ABBA');
+//   });
+// });

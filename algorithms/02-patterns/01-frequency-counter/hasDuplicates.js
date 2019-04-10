@@ -16,38 +16,42 @@ function hasDuplicates(...args) {
   const lookup = {};
 
   for (const arg of args) {
-    if (lookup[arg]) {
-      return true;
-    }
-    lookup[arg] = 1;
+    if (lookup[arg]) return true;
+    lookup[arg] = true;
   }
   return false;
 }
 
-
-console.log('1, 2, 3:', hasDuplicates(1, 2, 3));
-console.log('1, 2, 2:', hasDuplicates(1, 2, 2));
-console.log('"a", "b", "c", "d":', hasDuplicates('a', 'b', 'c', 'd'));
-console.log('"a", "b", 1, 2:', hasDuplicates('a', 'b', 1, 2));
-
 /*------------------------------
     ALTERNATIVE SOLUTIONS
 ------------------------------*/
-// // COLT'S SOLUTION
-// function hasDuplicates(...args) {
-//   const collection = {};
-//   for (const val of args) {
-//     collection[args[val]] = (collection[args[val]] || 0) + 1;
-//   }
-//   for (const key in collection) {
-//     if (collection[key] > 1) return true;
-//   }
-//   return false;
-// }
+// COLT'S SOLUTION
+function coltsHasDuplicates(...args) {
+  const collection = {};
+  for (const val of args) {
+    collection[val] = (collection[val] || 0) + 1;
+  }
+  console.log(collection);
+  for (const key in collection) {
+    if (collection[key] > 1) return true;
+  }
+  return false;
+}
+
+// USING 'Set' OBJECT
+function setHasDuplicates(...args) {
+  return new Set(args).size !== args.length;
+}
+
+module.exports = {
+  hasDuplicates,
+  coltsHasDuplicates,
+  setHasDuplicates,
+};
 
 
 // // PROBLEM: SHOULD NOT DETECT 1 & '1' AS DUPLICATE
-// function hasDuplicates(...args) {
+// function safeHasDuplicates(...args) {
 //   const lookup = {};
 
 //   for (const arg of args) {
@@ -59,16 +63,7 @@ console.log('"a", "b", 1, 2:', hasDuplicates('a', 'b', 1, 2));
 //   return false;
 // }
 
-// console.log('"a", "b", "1", 1:', hasDuplicates('a', 'b', '1', 1));
-// console.log('1", 1, [1]:', hasDuplicates(1', 1, [1]));
-
-
-// // USING 'Set' OBJECT
-// function hasDuplicates(...args) {
-//   return new Set(args).size !== args.length;
-// }
-
-// // F
+// //
 /*------------------------------
     TESTING PERFORMANCE
 ------------------------------*/

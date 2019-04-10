@@ -1,0 +1,16 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "description": "Just a simple sandbox for me to learn algorithms and data structures.",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.0.0"
+  }
+}

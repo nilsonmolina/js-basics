@@ -30,14 +30,6 @@ function countUnique(arr) {
   return count;
 }
 
-console.log('[1,1,1,1,1,2]: ', countUnique([1, 1, 1, 1, 1, 2]));
-console.log('[1,2,3,4,4,4,7,7,12,12,13]: ', countUnique([1, 2, 3, 4, 4, 4, 7, 7, 12, 12, 13]));
-console.log('[]: ', countUnique([]));
-console.log('[-2,-1,-1,0,1]: ', countUnique([-2, -1, -1, 0, 1]));
-console.log('[1,1,1,1,1,1,1,1,1]: ', countUnique([1, 1, 1, 1, 1, 1, 1, 1, 1]));
-console.log('[5]: ', countUnique([5]));
-
-
 /*------------------------------
     ALTERNATIVE SOLUTIONS
 ------------------------------*/
@@ -58,7 +50,13 @@ console.log('[5]: ', countUnique([5]));
 // }
 
 
-// // USING 'Set' OBJECT
-// function countUnique(arr) {
-//   return new Set(arr).size;
-// }
+// USING 'Set' OBJECT
+function countUniqueWithSet(arr) {
+  return new Set(arr).size;
+}
+
+
+module.exports = {
+  countUnique,
+  countUniqueWithSet,
+};

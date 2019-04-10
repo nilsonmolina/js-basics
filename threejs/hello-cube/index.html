@@ -25,15 +25,15 @@
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( renderer.domElement );
 
-        var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        var material = new THREE.MeshBasicMaterial( {color: 0x33ff33} );
-        var cube = new THREE.Mesh( geometry, material );
-        scene.add( cube );
-
-        // var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
-        // var edges = new THREE.EdgesGeometry( geometry );
-        // var cube = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xffffff }));
+        // var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        // var material = new THREE.MeshBasicMaterial( {color: 0x33ff33} );
+        // var cube = new THREE.Mesh( geometry, material );
         // scene.add( cube );
+
+        var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+        var edges = new THREE.EdgesGeometry( geometry );
+        var cube = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xffffff }));
+        scene.add( cube );
 
         camera.position.z = 5;
 

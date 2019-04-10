@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+}
+.sidebar.sidebar-left {
+    left: 0;
+    border: 1px solid blue;
+}
+.sidebar.sidebar-right {
+    border: 1px solid green;
+    right: 0;
+}
+.sidebar .module {
+    border: 1px solid black;
+    margin: 40px 20px;
+    padding: 10px;
+    overflow: auto;
+}
+.sidebar #page-nav {
+    height: 50vh;
+}
+.sidebar #admin-name {
+    height: 30vh;    
+}
+.sidebar #module-1 {
+    height: 50vh;
+}
+.sidebar #module-2 {
+    height: 30vh; 
+}
+.sidebar .sidebar-link {
+    padding: 10px;
+}
+
+.page-content {
+    border: 1px solid red;
+    position: fixed;
+    top: 0;
+    left: 250px;
+    bottom: 0;
+    right: 250px;
+}
