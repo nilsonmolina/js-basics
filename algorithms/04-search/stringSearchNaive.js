@@ -30,7 +30,7 @@ function stringSearchNaive(str, pattern) {
   return count;
 }
 
-
+// // FAILS - I THOUGHT I COULD OPTIMIZE THIS WAY, BUT NO
 // function stringSearchNaive(str, pattern) {
 //   let count = 0;
 
