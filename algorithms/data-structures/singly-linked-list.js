@@ -29,20 +29,22 @@ class SinglyLinkedList {
   pop() {
     if (this.length === 0) return undefined;
     if (this.length === 1) {
+      const temp = this.head;
       this.head = null;
       this.tail = null;
       this.length = 0;
-      return this;
+      return temp;
     }
 
     let curr = this.head;
     while (curr.next !== this.tail) {
       curr = curr.next;
     }
+    const temp = curr.next;
     curr.next = null;
     this.tail = curr;
     this.length--;
-    return this;
+    return temp;
   }
 
   shift() {
@@ -98,14 +100,14 @@ class SinglyLinkedList {
 
   remove(index) {
     if (index >= this.length || index < 0) return undefined;
-    if (index === 0) this.shift();
-    else if (index === this.length - 1) this.pop();
-    else {
-      const prev = this.get(index - 1);
-      prev.next = prev.next.next;
-      this.length--;
-    }
-    return this;
+    if (index === 0 || index === undefined) return this.shift();
+    if (index === this.length - 1) return this.pop();
+    const prev = this.get(index - 1);
+    const temp = prev.next;
+    prev.next = prev.next.next;
+    this.length--;
+
+    return temp;
   }
 
   reverse() {
@@ -125,6 +127,7 @@ class SinglyLinkedList {
     return this;
   }
 
+  // ---------- HELPER FUNCTIONS FOR TESTING AND DEBUGGING ----------
   traverse() {
     let curr = this.head;
     while (curr) {
@@ -133,26 +136,15 @@ class SinglyLinkedList {
     }
   }
 
-  print() {
+  toArray() {
     const arr = [];
     let curr = this.head;
     while (curr) {
       arr.push(curr.val);
       curr = curr.next;
     }
-    console.log(arr);
+    return (arr);
   }
 }
 
-// const first = new Node('hi');
-// first.next = new Node('there');
-// first.next.next = new Node('how');
-// first.next.next.next = new Node('are');
-// first.next.next.next.next = new Node('you');
-
-const list = new SinglyLinkedList();
-list.push('hi');
-list.push('there,');
-list.push('how');
-list.push('are');
-list.push('you');
+module.exports = { Node, SinglyLinkedList };
