@@ -19,7 +19,7 @@ class BinarySearchTree {
     }
 
     let curr = this.root;
-    while (true) {
+    while (val !== curr.value) {
       if (val < curr.value) {
         if (curr.left === null) {
           curr.left = newNode;
@@ -32,8 +32,9 @@ class BinarySearchTree {
           return this;
         }
         curr = curr.right;
-      } else return undefined;
+      }
     }
+    return undefined;
   }
 
   find(val) {
