@@ -161,29 +161,67 @@ describe('Binary Search Tree', () => {
     expect(tree.breadthFirstSearch(13)).toBeNull();
 
     // INSERT TEST DATA
-    tree.insert(13);
-    tree.insert(0);
-    tree.insert(5);
+    // -------------------- //
+    //         10           //
+    //      6       15      //
+    //    0   8   13  20    //
+    // -1               27  //
+    // -------------------- //
     tree.insert(10);
+    tree.insert(6);
     tree.insert(15);
+    tree.insert(0);
+    tree.insert(8);
+    tree.insert(13);
     tree.insert(20);
-    tree.insert(25);
+    tree.insert(27);
+    tree.insert(-1);
 
     // TRAVERSE THE TREE
-    expect(tree.breadthFirstTraversal()).toEqual([13, 0, 15, 5, 20, 10, 25]);
+    expect(tree.breadthFirstTraversal()).toEqual([10, 6, 15, 0, 8, 13, 20, -1, 27]);
 
     // SEARCH FOR EXISTING VALUES
-    expect(tree.breadthFirstSearch(13).value).toBe(13);
-    expect(tree.breadthFirstSearch(0).value).toBe(0);
-    expect(tree.breadthFirstSearch(15).value).toBe(15);
-    expect(tree.breadthFirstSearch(5).value).toBe(5);
-    expect(tree.breadthFirstSearch(20).value).toBe(20);
     expect(tree.breadthFirstSearch(10).value).toBe(10);
-    expect(tree.breadthFirstSearch(25).value).toBe(25);
+    expect(tree.breadthFirstSearch(6).value).toBe(6);
+    expect(tree.breadthFirstSearch(15).value).toBe(15);
+    expect(tree.breadthFirstSearch(0).value).toBe(0);
+    expect(tree.breadthFirstSearch(8).value).toBe(8);
+    expect(tree.breadthFirstSearch(20).value).toBe(20);
 
     // SEARCH FOR VALUES THAT DO NOT EXIST
     expect(tree.breadthFirstSearch(1)).toBeNull();
     expect(tree.breadthFirstSearch(2)).toBeNull();
     expect(tree.breadthFirstSearch(100)).toBeNull();
+  });
+
+  it('must run Depth First Search (DFS) properly', () => {
+    const tree = new BinarySearchTree();
+
+    // TRAVERSE WHEN TREE IS EMPTY
+    expect(tree.depthFirstSearchPreOrder()).toEqual([]);
+    expect(tree.depthFirstSearchPostOrder()).toEqual([]);
+    expect(tree.depthFirstSearchInOrder()).toEqual([]);
+
+    // INSERT TEST DATA
+    // -------------------- //
+    //          10          //
+    //      6       15      //
+    //    0   8   13  20    //
+    // -1               27  //
+    // -------------------- //
+    tree.insert(10);
+    tree.insert(6);
+    tree.insert(15);
+    tree.insert(0);
+    tree.insert(8);
+    tree.insert(13);
+    tree.insert(20);
+    tree.insert(27);
+    tree.insert(-1);
+
+    // TRAVERSE THE TREE
+    expect(tree.depthFirstSearchPreOrder()).toEqual([10, 6, 0, -1, 8, 15, 13, 20, 27]);
+    expect(tree.depthFirstSearchPostOrder()).toEqual([-1, 0, 8, 6, 13, 27, 20, 15, 10]);
+    expect(tree.depthFirstSearchInOrder()).toEqual([-1, 0, 6, 8, 10, 13, 15, 20, 27]);
   });
 });
