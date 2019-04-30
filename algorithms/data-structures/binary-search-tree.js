@@ -60,6 +60,39 @@ class BinarySearchTree {
 
     return false;
   }
+
+  breadthFirstTraversal() {
+    if (!this.root) return null;
+    const queue = [];
+    const values = [];
+    let curr = this.root;
+
+    queue.push(curr);
+    while (queue.length) {
+      curr = queue.shift();
+      values.push(curr.value);
+      if (curr.left) queue.push(curr.left);
+      if (curr.right) queue.push(curr.right);
+    }
+
+    return values;
+  }
+
+  breadthFirstSearch(val) {
+    if (!this.root || val === undefined) return null;
+    const queue = [];
+    let curr = this.root;
+
+    queue.push(curr);
+    while (queue.length) {
+      curr = queue.shift();
+      if (curr.value === val) return curr;
+      if (curr.left) queue.push(curr.left);
+      if (curr.right) queue.push(curr.right);
+    }
+
+    return null;
+  }
 }
 
 module.exports = { BinarySearchTree };
