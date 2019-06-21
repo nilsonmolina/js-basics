@@ -1,3 +1,4 @@
+// ITERATIVE SOLUTION
 function printNumVertical(n) {
   const digits = [];
   while (n > 0) {
@@ -10,7 +11,18 @@ function printNumVertical(n) {
   }
 }
 
-printNumVertical(12345);
-// printNumVertical();
 
-module.exports = { printNumVertical };
+// RECURSIVE SOLUTION
+function printNumRecursive(num) {
+  if (Math.floor(num / 10) === 0) {
+    console.log(num);
+    return;
+  }
+  printNumRecursive(Math.floor(num / 10));
+  console.log(num % 10);
+}
+
+module.exports = {
+  printNumVertical,
+  printNumRecursive,
+};
