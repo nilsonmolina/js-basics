@@ -19,6 +19,17 @@ const board = {
   element: document.querySelector('.board'),
   blocks: document.querySelectorAll('.block'),
   resetBtn: document.querySelector('.reset'),
+  announcement: document.querySelector('.announcement'),
+  winningCombo: [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ],
 
   getBlockVals: function get() {
     const blockVals = [];
@@ -33,30 +44,16 @@ const board = {
       this.blocks[i].innerHTML = '';
     }
   },
-  isGameOver: function check() {
+  findWinner: function check() {
     const blockVals = this.getBlockVals();
 
-    return this.checkRows(blockVals)
-        || this.checkCols(blockVals)
-        || this.checkDiag(blockVals)
-        || this.checkTie(blockVals);
-  },
-  checkRows: function check(b) {
-    return (b[0] === b[1] && b[1] === b[2] && b[0] !== '')
-        || (b[3] === b[4] && b[4] === b[5] && b[3] !== '')
-        || (b[6] === b[7] && b[7] === b[8] && b[6] !== '');
-  },
-  checkCols: function check(b) {
-    return (b[0] === b[3] && b[3] === b[6] && b[0] !== '')
-        || (b[1] === b[4] && b[4] === b[7] && b[1] !== '')
-        || (b[2] === b[5] && b[5] === b[8] && b[2] !== '');
-  },
-  checkDiag: function check(b) {
-    return (b[0] === b[4] && b[4] === b[8] && b[0] !== '')
-        || (b[2] === b[4] && b[4] === b[6] && b[2] !== '');
-  },
-  checkTie: function check(b) {
-    return !b.includes('');
+    for (const combo of this.winningCombo) {
+      if (blockVals[combo[0]] !== ''
+        && blockVals[combo[0]] === blockVals[combo[1]]
+        && blockVals[combo[1]] === blockVals[combo[2]]) return combo;
+    }
+
+    return !blockVals.includes('') ? 'tie' : false;
   },
 };
 
@@ -80,10 +77,19 @@ function handleBoardClick(e) {
 function handleReset() {
   game.config.isActive = true;
   board.clearBoard();
+  board.announcement.innerHTML = '';
 }
 
+// HELPER FUNCTIONS
 function checkGameOver() {
-  if (!board.isGameOver()) return;
+  const winningCombo = board.findWinner();
+  if (!winningCombo) return;
+
+  if (winningCombo === 'tie') board.announcement.innerHTML = 'It\'s a Draw!';
+  else {
+    const winner = board.blocks[winningCombo[0]].innerHTML;
+    board.announcement.innerHTML = `Player '${winner}' is the winner!`;
+  }
 
   game.config.isActive = false;
 }

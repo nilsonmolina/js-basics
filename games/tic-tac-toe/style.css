@@ -8,14 +8,17 @@
 }
 
 body {
-    font-family: sans-serif;
+    font-family: monospace;
     background: salmon;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 330px;
 }
 
 h1 {
     text-align: center;
     color: #333;
-    font-family: cursive;
     font-size: 5rem;
     margin-top: 5vh;
 }
@@ -24,11 +27,10 @@ h1 {
     TIC-TAC-TOE BOARD
 ------------------- */
 .board {
-    margin: 0 auto;
+    margin: 20px auto;
     display: flex;
     flex-wrap: wrap;
-    width: 350px;
-    min-width: 350px;
+    width: 330px;
 }
 
 .block {
@@ -40,13 +42,36 @@ h1 {
     text-align: center;
     line-height: 100px;
     user-select: none;
+    cursor: pointer;
     background: white;
     transition: box-shadow .25s ease;
     box-shadow: 0 0 5px rgba(0,0,0,.3);
 }
 .block:hover {
-    cursor: pointer;
     box-shadow: 0 0 20px rgba(0,0,0,.3);
 }
 
+.announcement {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.reset {
+    padding: 10px 20px;
+    background: transparent;
+    cursor: pointer;
+    border: 3px solid #333;
+    color: #333;
+    outline: none;
+    user-select: none;
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    transition: box-shadow .25s ease;
+    box-shadow: 0 0 0 rgba(0,0,0,.3);
+}
+.reset:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+}
 
