@@ -1,0 +1,52 @@
+/* -------------------
+    BASE STYLES
+------------------- */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background: salmon;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-family: cursive;
+    font-size: 5rem;
+    margin-top: 5vh;
+}
+
+/* -------------------
+    TIC-TAC-TOE BOARD
+------------------- */
+.board {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 350px;
+    min-width: 350px;
+}
+
+.block {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    font-size: 3rem;
+    color: #444;
+    text-align: center;
+    line-height: 100px;
+    user-select: none;
+    background: white;
+    transition: box-shadow .25s ease;
+    box-shadow: 0 0 5px rgba(0,0,0,.3);
+}
+.block:hover {
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0,0,0,.3);
+}
+
+
