@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Debouncing & Throttling</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Debounce & Throttle</h1>
+    Debouncing and Throttling are both used for optimizing performance of a web app by limiting the rate of function calls. With debouncing, you only call a function if a pause of the set amount of time is acheived, whereas with throttling, you run the function in intervals of the set amount of time.
+    <h3>onKeyUp example</h3>
+    <p>Type into the input boxes below to see how many times you get calls based on the rate limiting you are using. Check your console to see the example api calls.</p>
+    <label for="search-normal">Normal Calls</label><br/>
+    <input type="text" id="search-normal"><br/>
+
+    <label for="search-debounce">Debounced Calls</label><br/>
+    <input type="text" id="search-debounce"><br/>
+
+    <label for="search-throttle">Throttled Calls</label><br/>
+    <input type="text" id="search-throttle"><br/>
+
+    <h3>onMouseMove example</h3>
+    <p>Move your mouse in the area below to see how many times you get calls based on the rate limiting you are using.</p>
+    <div id="moveonme" style="">
+        move your mouse here
+    </div>
+    <canvas id="paintonme" height="600" width="600" style="float:right;"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>

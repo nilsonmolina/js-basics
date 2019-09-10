@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>check console</h2>
+
+    <script>
+        function htmlElement() {
+            this.click = function() {
+                console.log('clicked');
+            };
+        }
+        htmlElement.prototype.focus = function() {
+            console.log('focused');
+        }
+
+        function htmlSelectElement(arr) {
+            this.items = Array.isArray(arr) ? arr : [];
+
+            this.addItem = function (item) {
+                this.items.push(item);
+            };
+            this.removeItem = function (item) {
+                this.items = this.items.filter(el => el !== item);
+            };
+        }
+        htmlSelectElement.prototype = new htmlElement();
+
+        class Car {
+            constructor(wheels, color) {
+                this.wheels = wheels;
+                this.color = color;
+            }
+            drive() {
+                console.log('Vroom vroom vroom...');
+            }
+        }
+
+        class RedHonda extends Car {
+            constructor(owner) {
+                super(4, 'red');
+                this.owner = owner;
+            }
+            drive() {
+                console.log(this.owner, '\'s honda goes vroom vroom vroom.');
+            }
+        }
+        
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- function HtmlElement() {
+    this.click = function () {
+        console.log('clicked');
+    }
+}
+
+HtmlElement.prototype.focus = function () {
+    console.log('focused');
+}
+
+function HtmlSelectElement(arr = []) {
+    this.items = arr;
+    
+    this.addItem = function (item) {
+        this.items.push(item);
+    }
+
+    this.removeItem = function (item) {
+        this.items = this.items.filter((curr) => curr !== item);
+    }
+}
+
+HtmlSelectElement.prototype = new HtmlElement(); -->
