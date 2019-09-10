@@ -10,22 +10,32 @@ function debounce(fn, wait = 250) {
 }
 
 function throttle(fn, threshold = 250) {
-  let last;
-  let timeout;
+  let flag = true;
   return () => {
-    let now = Date.now();
-    if (last && now < last + threshold) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        last = now;
-        fn();
-      }, threshold);
-    } else {
-      last = now;
-      fn();
-    }
+    if (!flag) return;
+    flag = false;
+    fn();
+    setTimeout(() => flag = true , threshold);
   };
 }
+
+// function throttle(fn, threshold = 250) {
+//   let last;
+//   let timeout;
+//   return () => {
+//     let now = Date.now();
+//     if (last && now < last + threshold) {
+//       clearTimeout(timeout);
+//       timeout = setTimeout(() => {
+//         last = now;
+//         fn();
+//       }, threshold);
+//     } else {
+//       last = now;
+//       fn();
+//     }
+//   };
+// }
 
 /*---------------------
   onKeyUp
@@ -35,9 +45,9 @@ const searchDebounce = document.querySelector('#search-debounce');
 const searchThrottle = document.querySelector('#search-throttle');
 
 // EVENT LISTENER FUNCTIONS
-searchNormal.addEventListener('keyup', getData.bind(this, searchNormal));
-searchDebounce.addEventListener('keyup', debounce(getData.bind(this, searchDebounce), 500));
-searchThrottle.addEventListener('keyup', throttle(getData.bind(this, searchThrottle), 500));
+searchNormal.addEventListener('keyup', () => getData(searchNormal)); // getData.bind(this, searchNormal)
+searchDebounce.addEventListener('keyup', debounce(() => getData(searchDebounce), 1000)); // debounce(getData.bind(this, searchDebounce), 500)
+searchThrottle.addEventListener('keyup', throttle(() => getData(searchThrottle), 1000)); // throttle(getData.bind(this, searchThrottle), 500)
 
 // EVENT LISTENER FUNCTIONS
 function getData(data) {
@@ -60,9 +70,9 @@ flush();
 
 // EVENT LISTENER FUNCTIONS
 const mouseArea = document.querySelector('#mouse-area');
-mouseArea.addEventListener('mousemove', handleMove.bind(this, 0));
-mouseArea.addEventListener('mousemove', debounce(handleMove.bind(this, 1), 300));
-mouseArea.addEventListener('mousemove', throttle(handleMove.bind(this, 2), 300));
+mouseArea.addEventListener('mousemove', () => handleMove(0)); // handleMove.bind(this, 0)
+mouseArea.addEventListener('mousemove', debounce(() => handleMove(1), 300)); // debounce(handleMove.bind(this, 1), 300)
+mouseArea.addEventListener('mousemove', throttle(() => handleMove(2), 300)); // throttle(handleMove.bind(this, 2), 300)
 
 // EVENT LISTENER FUNCTIONS
 function handleMove(lane) {
@@ -105,22 +115,3 @@ function getTimeDiff() {
   if (!startTime) startTime = time;    
   return time - startTime;
 }
-
-
-
-// // ORIGINAL ATTEMPT AT DEBOUNCE AND THROTTLE
-// function debounce(fn, delay = 250) {
-//   let timer;
-//   return function() {
-//     clearTimeout(timer);
-//     timer = setTimeout(() => fn(`debounce - ${searchDebounce.value}`), delay);
-//   };
-// }
-
-// function throttle(fn, delay = 250) {
-//   let interval;
-//   return function() {
-//     if (interval) return;
-//     interval = setInterval(() => fn(`throttle - ${searchThrottle.value}`), delay);
-//   }
-// }
