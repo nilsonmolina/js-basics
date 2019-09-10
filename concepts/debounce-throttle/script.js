@@ -47,7 +47,7 @@ function getData(data) {
 /*---------------------
   onMouseMove
 ---------------------*/
-const canvas = document.querySelector('#paintonme');
+const canvas = document.querySelector('#canvas');
 const context = canvas.getContext('2d');
 const canvasTimeScale = 5 * 1000;
 const paintColors = ['#bbd', '#464', '#d88'];
@@ -59,10 +59,10 @@ canvas.width = window.innerWidth - 250;
 flush();
 
 // EVENT LISTENER FUNCTIONS
-const moveArea = document.querySelector('#moveonme');
-moveArea.addEventListener('mousemove', handleMove.bind(this, 0));
-moveArea.addEventListener('mousemove', debounce(handleMove.bind(this, 1), 300));
-moveArea.addEventListener('mousemove', throttle(handleMove.bind(this, 2), 300));
+const mouseArea = document.querySelector('#mouse-area');
+mouseArea.addEventListener('mousemove', handleMove.bind(this, 0));
+mouseArea.addEventListener('mousemove', debounce(handleMove.bind(this, 1), 300));
+mouseArea.addEventListener('mousemove', throttle(handleMove.bind(this, 2), 300));
 
 // EVENT LISTENER FUNCTIONS
 function handleMove(lane) {
