@@ -13,7 +13,7 @@ function throttle(fn, threshold = 250) {
   let last;
   let timeout;
   return () => {
-    let now = new Date().getTime();
+    let now = Date.now();
     if (last && now < last + threshold) {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
@@ -101,7 +101,7 @@ function paintRect(lane, time) {
 }
 
 function getTimeDiff() {
-  let time = new Date().getTime();
+  let time = Date.now();
   if (!startTime) startTime = time;    
   return time - startTime;
 }
