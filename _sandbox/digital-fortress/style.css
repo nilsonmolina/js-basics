@@ -117,6 +117,16 @@ input { font-family: Quicksand, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #01fded;
 }
 
+
+@media only screen and (max-width: 860px) {
+    .container {
+        width: calc(100vw - 40px);
+    }
+    .title {
+        margin-top: 0;
+    }
+}
+
 @keyframes slideup {
     0% {
         transform: translateY(2px);
