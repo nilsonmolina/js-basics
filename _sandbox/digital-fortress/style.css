@@ -110,6 +110,8 @@ input { font-family: Quicksand, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 4px 8px;
     margin: 5px;
     background-color: #444;
+}
+.encrypted span:last-of-type {
     animation: slideup .3s forwards;
 }
 
@@ -129,7 +131,7 @@ input { font-family: Quicksand, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 @keyframes slideup {
     0% {
-        transform: translateY(2px);
+        transform: translateY(4px);
     }
     100% {
         transform: translateY(0);
