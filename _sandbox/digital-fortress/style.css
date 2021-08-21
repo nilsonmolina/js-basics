@@ -118,6 +118,10 @@ input { font-family: Quicksand, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 .encrypted span.not-letter {
     color: #01fded;
 }
+.encrypted span.empty {
+    color: #9fa3c6;
+    background-color: transparent;
+}
 
 
 @media only screen and (max-width: 860px) {

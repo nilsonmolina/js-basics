@@ -4,17 +4,25 @@ const susanCipher = document.querySelector('#susan-cipher');
 const caesarCipher = document.querySelector('#caesar-cipher');
 
 // Event Listeners
+applyEmptyMessage();
 message.addEventListener('input', handleMessageChanged);
 
 // Event Functions
 function handleMessageChanged(e) {
     const input = e.currentTarget.value;
+    if (input === '') return applyEmptyMessage();
 
     encryptSusanCipher(input);
     encryptCaesarCipher(input);
 }
 
 // Encryption Methods
+function applyEmptyMessage() {
+  document.querySelectorAll('.encrypted').forEach((element) => {
+    element.innerHTML = '<span class="empty">// Add a message to encrypt</span>';
+  });
+}
+
 function encryptSusanCipher(message) {
     let encrypted = '';
     for (const char of message.toLowerCase()) {
