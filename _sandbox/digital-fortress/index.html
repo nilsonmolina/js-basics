@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Fortress</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;600;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="title">DIGITAL FORTRESS</div>
+
+            <label class="input-group" for="message">
+                <svg id="message-icon" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 9V6C8 3.79086 9.79086 2 12 2C14.2091 2 16 3.79086 16 6V9H18C19.1046 9 20 9.89543 20 11V20C20 21.1046 19.1046 22 18 22H6C4.89543 22 4 21.1046 4 20V11C4 9.89543 4.89543 9 6 9H8ZM14 6V9H10V6C10 4.89543 10.8954 4 12 4C13.1046 4 14 4.89543 14 6ZM6 11V20H18V11H6Z" fill="#040921"/>
+                </svg>
+
+                <input type="text" id="message" placeholder="Message to encrypt...">
+            </label>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <div class="encryption-group">
+                <h3>
+                    Susan Cipher
+                    <small>
+                        A simple cipher created by NSA's head cryptographer Susan Fletcher.
+                    </small>
+                </h3>
+                
+                <div id="susan-cipher" class="encrypted"></div>
+            </div>
+
+            <div class="encryption-group">
+                <h3>
+                    Caesar Cipher <span>(rot-13)</span>
+                    <small>
+                        Created by Julius Caesar to prevent his enemies from intercepting military
+                        correspondence.
+                    </small>
+                </h3>
+                
+                <div id="caesar-cipher" class="encrypted"></div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
