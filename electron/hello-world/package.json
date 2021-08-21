@@ -5,11 +5,13 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress": "cypress open"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cypress": "^3.4.1",
     "electron": "^6.0.7"
   }
 }

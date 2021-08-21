@@ -1,0 +1,29 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+body {
+    background: #d5d6d7;
+}
+.jumbotron {
+    background: #2B2E3A;
+    width: 100%;
+    padding: 75px 40px;
+    color: #597f89;
+}
+.jumbotron h1 {
+    color: #9feaf9;
+    font-weight: 400;
+}
+
+form {
+    width: 100%;
+    padding: 40px;
+}
+
+form input {
+    height: 1.75rem;
+    padding: 0 10px;
+}
